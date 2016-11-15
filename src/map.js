@@ -25,7 +25,6 @@ export const createInstance = function(opts, element) {
     // set the city name
     map.setCurrentCity(opts.city);
     return map;
-
 };
 
 export const createMarker = function(marker, pt) {

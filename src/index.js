@@ -33,7 +33,7 @@ export const ngBaiduMap = (function() {
 
                 var map = createInstance(opts, element);
 
-                $scope.onMapLoaded({map});
+                $scope.onMapLoaded({BMap, BMapLib, map});
 
                 //create markers
                 var previousMarkers = [];

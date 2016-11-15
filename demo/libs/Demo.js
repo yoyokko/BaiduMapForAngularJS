@@ -25,8 +25,9 @@ demo.controller('demoCtrl', ['$scope', '$timeout',
             }]
         };
 
-        $scope.mapLoaded = function(map) {
-            console.log(map);
+        $scope.mapLoaded = function(map, BMap, BMapLib) {
+            console.log(map, BMap, BMapLib);
+            console.log(typeof map, typeof BMap, typeof BMapLib);
         };
 
         $timeout(function() {
