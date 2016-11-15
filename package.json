@@ -1,11 +1,12 @@
 {
   "name": "angular-baidu-map",
+  "private": true,
   "version": "2.2.0",
   "description": "A baidu-map directive for AngularJS",
   "main": "dist/angular-baidu-map.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/leftstick/BaiduMapForAngularJS.git"
+    "url": "git://github.com/yoyokko/BaiduMapForAngularJS.git"
   },
   "scripts": {
     "build": "webpack",
@@ -31,9 +32,9 @@
   "author": "Howard.Zuo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/leftstick/BaiduMapForAngularJS/issues"
+    "url": "https://github.com/yoyokko/BaiduMapForAngularJS/issues"
   },
-  "homepage": "https://github.com/leftstick/BaiduMapForAngularJS",
+  "homepage": "https://github.com/yoyokko/BaiduMapForAngularJS",
   "devDependencies": {
     "angular": "^1.5.7",
     "babel-core": "^6.14.0",
