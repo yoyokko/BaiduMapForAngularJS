@@ -20,7 +20,7 @@ demo.controller('demoCtrl', ['$scope', '$timeout',
                 icon: 'img/mappiont.png',
                 width: 49,
                 height: 60,
-                title: 'Where',
+                title: 'Where labe label',
                 content: 'Put description here'
             }]
         };
@@ -29,6 +29,10 @@ demo.controller('demoCtrl', ['$scope', '$timeout',
             console.log(map, BMap, BMapLib);
             console.log(typeof map, typeof BMap, typeof BMapLib);
         };
+
+        $scope.labelClicked = function(marker) {
+            console.log(marker);
+        }
 
         $timeout(function() {
             $scope.mapOptions.center.longitude = 121.500885;

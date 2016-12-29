@@ -32,11 +32,15 @@ export const createMarker = function(marker, pt) {
         var icon = new BMap.Icon(marker.icon, new BMap.Size(marker.width, marker.height));
         return new BMap.Marker(pt, {icon: icon});
     }
-    return new BMap.Marker(pt);
-
+    var m = new BMap.Marker(pt);
+    if (marker.title) {
+        var label = new BMap.Label(marker.title, {offset:new BMap.Size(20,-10)});
+        m.setLabel(label);
+    }
+    return m;
 };
 
-export const redrawMarkers = function(map, previousMarkers, opts) {
+export const redrawMarkers = function(map, previousMarkers, opts, clickcb) {
 
     previousMarkers.forEach(function({marker, listener}) {
         marker.removeEventListener('click', listener);
@@ -67,6 +71,9 @@ export const redrawMarkers = function(map, previousMarkers, opts) {
         });
         previousMarker.listener = function() {
             this.openInfoWindow(infoWindow2);
+            if (clickcb) {
+                clickcb({marker})
+            }
         };
         marker2.addEventListener('click', previousMarker.listener);
     });

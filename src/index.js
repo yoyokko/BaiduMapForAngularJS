@@ -16,7 +16,8 @@ export const ngBaiduMap = (function() {
             options: '=',
             ak: '@',
             offline: '=',
-            onMapLoaded: '&'
+            onMapLoaded: '&',
+            labelClicked: '&'
         },
         link: function($scope, element, attrs) {
 
@@ -38,19 +39,19 @@ export const ngBaiduMap = (function() {
                 //create markers
                 var previousMarkers = [];
 
-                redrawMarkers(map, previousMarkers, opts);
+                redrawMarkers(map, previousMarkers, opts, $scope.labelClicked);
 
                 $scope.$watch('options.center', function(newValue, oldValue) {
 
                     opts = $scope.options;
                     map.centerAndZoom(new BMap.Point(opts.center.longitude,
                         opts.center.latitude), opts.zoom);
-                    redrawMarkers(map, previousMarkers, opts);
+                    redrawMarkers(map, previousMarkers, opts, $scope.labelClicked);
 
                 }, true);
 
                 $scope.$watch('options.markers', function(newValue, oldValue) {
-                    redrawMarkers(map, previousMarkers, opts);
+                    redrawMarkers(map, previousMarkers, opts, $scope.labelClicked);
                 }, true);
 
             });

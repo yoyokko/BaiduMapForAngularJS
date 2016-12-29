@@ -7,7 +7,9 @@
 </head>
 
 <body ng-controller="demoCtrl">
-    <baidu-map options="mapOptions" ak="gd0GyxGUxSCoAbmdyQBhyhrZ" offline="offlineOpts" style="width: 500px; height: 500px;display: block;" on-map-loaded="mapLoaded(map, BMap, BMapLib)"></baidu-map>
+    <baidu-map options="mapOptions" ak="gd0GyxGUxSCoAbmdyQBhyhrZ" offline="offlineOpts" style="width: 500px; height: 500px;display: block;" on-map-loaded="mapLoaded(map, BMap, BMapLib)" label-clicked="labelClicked(marker)">
+
+    </baidu-map>
 </body>
 
 </html>

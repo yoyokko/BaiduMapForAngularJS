@@ -88,7 +88,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            options: '=',
 	            ak: '@',
 	            offline: '=',
-	            onMapLoaded: '&'
+	            onMapLoaded: '&',
+	            labelClicked: '&'
 	        },
 	        link: function link($scope, element, attrs) {
 	
@@ -110,17 +111,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	                //create markers
 	                var previousMarkers = [];
 	
-	                (0, _map.redrawMarkers)(map, previousMarkers, opts);
+	                (0, _map.redrawMarkers)(map, previousMarkers, opts, $scope.labelClicked);
 	
 	                $scope.$watch('options.center', function (newValue, oldValue) {
 	
 	                    opts = $scope.options;
 	                    map.centerAndZoom(new BMap.Point(opts.center.longitude, opts.center.latitude), opts.zoom);
-	                    (0, _map.redrawMarkers)(map, previousMarkers, opts);
+	                    (0, _map.redrawMarkers)(map, previousMarkers, opts, $scope.labelClicked);
 	                }, true);
 	
 	                $scope.$watch('options.markers', function (newValue, oldValue) {
-	                    (0, _map.redrawMarkers)(map, previousMarkers, opts);
+	                    (0, _map.redrawMarkers)(map, previousMarkers, opts, $scope.labelClicked);
 	                }, true);
 	            });
 	
@@ -330,10 +331,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var icon = new BMap.Icon(marker.icon, new BMap.Size(marker.width, marker.height));
 	        return new BMap.Marker(pt, { icon: icon });
 	    }
-	    return new BMap.Marker(pt);
+	    var m = new BMap.Marker(pt);
+	    if (marker.title) {
+	        var label = new BMap.Label(marker.title, { offset: new BMap.Size(20, -10) });
+	        m.setLabel(label);
+	    }
+	    return m;
 	};
 	
-	var redrawMarkers = exports.redrawMarkers = function redrawMarkers(map, previousMarkers, opts) {
+	var redrawMarkers = exports.redrawMarkers = function redrawMarkers(map, previousMarkers, opts, clickcb) {
 	
 	    previousMarkers.forEach(function (_ref) {
 	        var marker = _ref.marker,
@@ -367,6 +373,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	        previousMarker.listener = function () {
 	            this.openInfoWindow(infoWindow2);
+	            if (clickcb) {
+	                clickcb({ marker: marker });
+	            }
 	        };
 	        marker2.addEventListener('click', previousMarker.listener);
 	    });
